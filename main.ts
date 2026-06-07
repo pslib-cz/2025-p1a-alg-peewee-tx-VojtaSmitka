@@ -1,3 +1,5 @@
+//ovaldac
+
 radio.setGroup(25)
 let gas: number = 0
 const opakovani: number = 5
