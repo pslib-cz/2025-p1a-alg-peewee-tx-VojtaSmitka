@@ -1,12 +1,13 @@
 //ovaldac
 
 radio.setGroup(25)
+
 let gas: number = 0
-const opakovani: number = 5
+const opakovani: number = 3
 let hodnota: number
 
-let gearIndex: number = 1
-const gear: number[] = [-30, 40]
+let gearIndex: number = 2
+const gear: number[] = [40, 60, 100]
 
 basic.showString(`${gearIndex}`)
 
@@ -15,16 +16,19 @@ basic.forever(function () {
         gas = gear[gearIndex]
     }
     else if (input.buttonIsPressed(Button.B)) {
-        if (gearIndex < gear.length - 1) {
-            gearIndex = gearIndex + 1
-            basic.showString(`${gearIndex}`)
-            basic.pause(200)
-        } else {
-            gearIndex = 0
-
-            basic.showString(`${gearIndex}`)
-            basic.pause(200)
-        }
+        gas = -gear[gearIndex]
+    }
+    else if (input.pinIsPressed(TouchPin.P0)) {
+        gearIndex = 0
+        basic.showNumber(gearIndex)
+    }
+    else if (input.pinIsPressed(TouchPin.P1)) {
+        gearIndex = 1
+        basic.showNumber(gearIndex)
+    }
+    else if (input.pinIsPressed(TouchPin.P2)) {
+        gearIndex = 2
+        basic.showNumber(gearIndex)
     }
     else {
         gas = 0
@@ -33,7 +37,7 @@ basic.forever(function () {
     hodnota = 0
     for (let i = 0; i < opakovani; i++) {
         hodnota += input.rotation(Rotation.Roll)
-        basic.pause(10)
+        basic.pause(5)
     }
 
     hodnota = hodnota / opakovani
@@ -47,5 +51,5 @@ basic.forever(function () {
 
     radio.sendValue("forward", gas)
     radio.sendValue("steer", hodnota)
-    basic.pause(20)
+    basic.pause(10)
 })
