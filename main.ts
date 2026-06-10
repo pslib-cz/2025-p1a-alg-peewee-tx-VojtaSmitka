@@ -1,5 +1,3 @@
-//ovaldac
-
 radio.setGroup(25)
 
 let gas: number = 0
@@ -9,7 +7,7 @@ let hodnota: number
 let gearIndex: number = 2
 const gear: number[] = [40, 60, 100]
 
-basic.showString(`${gearIndex}`)
+basic.showNumber(gearIndex)
 
 basic.forever(function () {
     if (input.buttonIsPressed(Button.A)) {
